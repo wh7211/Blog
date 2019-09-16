@@ -1,0 +1,21 @@
+{% extends 'blogs/base.html' %}
+
+{% block content %}
+
+  <p>主题: {{ topic.title }}</p>
+
+  <p>帖子:</p>
+  <p>
+    <a href="{% url 'blogs:new_topic' %}">发新贴</a>
+  </p>
+  <ul>
+    <li>
+      <p>{{ topic.date_added|date:'M d, Y H:i' }}</p>
+      <p>{{ topic.text|linebreaks }}</p>
+      <p>
+        <a href="{% url 'blogs:edit_topic' topic.id %}">编辑帖子</a>
+      </p>
+    </li>
+  </ul>
+
+{% endblock content %}

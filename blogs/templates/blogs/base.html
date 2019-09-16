@@ -1,0 +1,17 @@
+<p>
+  <a href="{% url 'blogs:index' %}">博客</a> -
+  <a href="{% url 'blogs:topics' %}">主题列表</a> -
+  {% if user.is_authenticated %}
+    你好, {{ user.username }}.
+    <a href="{% url 'users:logout' %}">注销</a>
+  {% else %}
+    <a href="{% url 'users:register' %}">注册</a> -
+    <a href="{% url 'users:login' %}">登录</a>
+  {% endif %}
+</p>
+
+{% block content %}{% endblock content %}
+
+{% comment "知识点" %}
+在Django身份验证系统中，每个模板都可使用变量user
+{% endcomment %}
