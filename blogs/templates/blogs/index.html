@@ -1,5 +1,31 @@
 {% extends "blogs/base.html" %}
 
+{% block header %}
+  <div class='jumbotron'>
+    <h2>希望.</h2>
+    <p>常守朱：“驻足不前只会造成任何事都无法解决，现在只能不断前进，
+        无论如何微弱，希望总是存在。”</p>
+    <p>
+      <a class="btn btn-primary btn-lg" role="button"
+          href="{% url 'users:register' %}">注册</a>
+    </p>
+  </div>
+{% endblock header %}
+
 {% block content %}
-  <p>我的博客.</p>
+
+  <h3>
+    <a href="{% url 'users:register' %}">注册一个账户</a> 可以在这里
+        记录每天的生活和工作，希望自己每天都能用心工作，开心生活。
+  </h3>
+  <h3>
+    希望家人，朋友一切都好，希望每个关心
+    爱护我的人一切都好。
+  </h3>
+
+
+{% comment "知识点" %}
+<div class='jumbotron'>：定义超大屏幕
+{% endcomment %}
+
 {% endblock content %}

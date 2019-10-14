@@ -1,3 +1,74 @@
+{% load bootstrap3 %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>博客网站</title>
+
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+
+  </head>
+
+  <body>
+
+    <!-- Static navbar -->
+    <nav class="navbar navbar-default navbar-static-top" role="navigation">
+      <div class="container">
+
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed"
+                  data-toggle="collapse" data-target="#navbar"
+                  aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">切换导航</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="{% url 'blogs:index' %}">
+                博客</a>
+        </div>
+
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="{% url 'blogs:topics' %}">主题列表</a></li>
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            {% if user.is_authenticated %}
+              <li><a>Hello, {{ user.username }}.</a></li>
+              <li><a href="{% url 'users:logout' %}">注销</a></li>
+            {% else %}
+              <li><a href="{% url 'users:register' %}">注册</a></li>
+              <li><a href="{% url 'users:login' %}">登录</a></li>
+            {% endif %}
+          </ul>
+        </div><!--/.nav-collapse -->
+
+      </div>
+    </nav>
+
+    <div class="container">
+
+      <div class="page-header">
+        {% block header %}{% endblock header %}
+      </div>
+
+      <div>
+        {% block content %}{% endblock content %}
+      </div>
+    </div> <!-- /container -->
+  </body>
+</html>
+
+
+
+
+{% comment "之前的老代码" %}
 <p>
   <a href="{% url 'blogs:index' %}">博客</a> -
   <a href="{% url 'blogs:topics' %}">主题列表</a> -
@@ -12,6 +83,6 @@
 
 {% block content %}{% endblock content %}
 
-{% comment "知识点" %}
-在Django身份验证系统中，每个模板都可使用变量user
+
+说明：在Django身份验证系统中，每个模板都可使用变量user
 {% endcomment %}

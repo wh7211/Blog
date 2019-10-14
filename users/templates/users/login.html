@@ -1,17 +1,19 @@
 {% extends "blogs/base.html" %}
+{% load bootstrap3 %}
+
+{% block header %}
+  <h2>登录到你的账户。</h2>
+{% endblock header %}
 
 {% block content %}
+  <form method="post" action="{% url 'users:login' %}" class="form">
+    {% csrf_token %}
+    {% bootstrap_form form %}
 
-  {% if form.errors %}
-  <p>你的用户名和密码不匹配, 请重试.</p>
-  {% endif %}
+    {% buttons %}
+      <button name="submit" class="btn btn-primary">登录</button>
+    {% endbuttons %}
 
-  <form method="post" action="{% url 'users:login' %}">
-  {% csrf_token %}
-  {{ form.as_p }}
-
-  <button name="submit">登录</button>
-  <input type="hidden" name="next" value="{% url 'blogs:index' %}" />
+    <input type="hidden" name="next" value="{% url 'blogs:index' %}" />
   </form>
-
 {% endblock content %}

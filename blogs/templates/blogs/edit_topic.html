@@ -1,15 +1,24 @@
 {% extends "blogs/base.html" %}
+{% load bootstrap3 %}
+
+{% block header %}
+  <h2>编辑帖子:</h2>
+{% endblock header %}
 
 {% block content %}
 
   <p><a href="{% url 'blogs:topic' topic.id %}">{{ topic }}</a></p>
 
-  <p>编辑帖子:</p>
-
-  <form action="{% url 'blogs:edit_topic' topic.id %}" method='post'>
+  <form action="{% url 'blogs:edit_topic' topic.id %}" method='post'
+      class="form">
+    <!-- 防止攻击者利用表单来获得对服务器未经授权的访问（这种攻击被称为跨站请求伪造） -->
     {% csrf_token %}
-    {{ form.as_p }}
-    <button name="submit">保存</button>
+    {% bootstrap_form form %}
+
+    <!-- 创建提交按钮 -->
+    {% buttons %}
+      <button name="submit" class="btn btn-primary">保存</button>
+    {% endbuttons %}
   </form>
 
 {% endblock content %}

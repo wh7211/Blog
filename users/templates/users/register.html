@@ -1,13 +1,26 @@
 {% extends "blogs/base.html" %}
+{% load bootstrap3 %}
+
+{% block header %}
+  <h2>注册账户。</h2>
+{% endblock header %}
 
 {% block content %}
 
-  <form method="post" action="{% url 'users:register' %}">
-    {% csrf_token %}
-    {{ form.as_p }}
+  <form method="post" action="{% url 'users:register' %}"
+      class="form">
 
-    <button name="submit">注册</button>
+    <!-- 防止攻击者利用表单来获得对服务器未经授权的访问（这种攻击被称为跨站请求伪造） -->
+    {% csrf_token %}
+    {% bootstrap_form form %}
+
+    <!-- 创建提交按钮 -->
+    {% buttons %}
+      <button name="submit" class="btn btn-primary">注册</button>
+    {% endbuttons %}
+
     <input type="hidden" name="next" value="{% url 'blogs:index' %}" />
+
   </form>
 
 {% endblock content %}

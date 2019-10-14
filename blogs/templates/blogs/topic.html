@@ -1,21 +1,29 @@
 {% extends 'blogs/base.html' %}
 
+{% block header %}
+  <h2>主题: {{ topic.title }}</h2>
+{% endblock header %}
+
 {% block content %}
 
-  <p>主题: {{ topic.title }}</p>
-
-  <p>帖子:</p>
   <p>
     <a href="{% url 'blogs:new_topic' %}">发新贴</a>
   </p>
-  <ul>
-    <li>
-      <p>{{ topic.date_added|date:'M d, Y H:i' }}</p>
-      <p>{{ topic.text|linebreaks }}</p>
-      <p>
-        <a href="{% url 'blogs:edit_topic' topic.id %}">编辑帖子</a>
-      </p>
-    </li>
-  </ul>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3>
+        {{ topic.date_added|date:'M d, Y H:i' }}
+        <small>
+          <a href="{% url 'blogs:edit_topic' topic.id %}">
+              编辑帖子</a>
+        </small>
+      </h3>
+    </div>
+    <div class="panel-body">
+      {{ topic.text|linebreaks }}
+    </div>
+  </div> <!-- panel -->
 
 {% endblock content %}
+
