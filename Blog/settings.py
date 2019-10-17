@@ -134,3 +134,38 @@ LOGIN_URL = '/users/login/'
 BOOTSTRAP3 = {
     'include_jquery': True,
     }
+
+# Heroku设置
+if os.getcwd() == '/app':
+    import dj_database_url
+
+    DATABASES = {
+        'default': dj_database_url.config(default='postgres://localhost')
+    }
+
+    # 让request.is_secure()承认X-Forwarded-Proto头
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+    # 支持所有的主机头(host header)
+    ALLOWED_HOSTS = ['*']
+
+    # 静态资产配置
+    # 下面的代码是书上提供的，暂时不用，先用官网提供的方法
+    # BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    # STATIC_ROOT = 'staticfiles'
+    # STATICFILES_DIRS = (
+    # os.path.join(BASE_DIR, 'static'),
+    # )
+
+    # 下面是官网提供的方法，参考：https://devcenter.heroku.com/articles/django-assets
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+    # Static files (CSS, JavaScript, Images)
+    # https://docs.djangoproject.com/en/1.9/howto/static-files/
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    STATIC_URL = '/static/'
+
+    # Extra places for collectstatic to find static files.
+    STATICFILES_DIRS = (
+        os.path.join(BASE_DIR, 'static'),
+    )
