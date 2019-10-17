@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect, Http404
 # from django.core.urlresolvers import reverse # django2.0已废弃
 from django.urls import reverse
@@ -25,7 +26,8 @@ def topics(request):
 
 def topic(request, topic_id):
     """显示单个主题及其所有的条目"""
-    topic = BlogPost.objects.get(id=topic_id)
+    # topic = BlogPost.objects.get(id=topic_id)
+    topic = get_object_or_404(BlogPost, id=topic_id)
     context = {'topic': topic}
     return render(request, 'blogs/topic.html', context)
 

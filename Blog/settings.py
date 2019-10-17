@@ -23,9 +23,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '1v(4$-ofa6fg5vm!ax#%1(%pb9_0fx*bl+sgzeq#2l(lo$@lnp'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = []
+
+# 安全警告：不要在在线环境中启用调试！
+DEBUG = False
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -61,8 +65,9 @@ ROOT_URLCONF = 'Blog.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
-        ,
+        # 'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        # 让Django在根模板目录中查找错误页面模板
+        'DIRS': [os.path.join(BASE_DIR, 'Blog/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
